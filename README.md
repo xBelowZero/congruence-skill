@@ -76,21 +76,45 @@ A skill executa um workflow de 6 passos:
 
 ```
 congruence/
-├── SKILL.md                              # Skill principal (workflow de 6 passos)
-├── references/
-│   ├── source-of-truth-priority.md       # 11 níveis de fontes de verdade
-│   ├── congruence-checklist.md           # Checklist por natureza da claim
-│   ├── severity-rubric.md                # 4 níveis de severidade
-│   ├── claim-extraction-guide.md         # 5 técnicas de extração
-│   └── report-format.md                  # Template do relatório
-├── examples/
-│   ├── faq-congruence-review.md          # Ex: Sistema de Pagamento Stripe
-│   ├── landing-page-congruence-review.md # Ex: API REST + Documentação
-│   ├── dashboard-congruence-review.md    # Ex: Onboarding + Permissões
-│   └── documentation-congruence-review.md # Ex: Setup + Configuração
+├── SKILL.md                          # Workflow + Iron Law + tabelas (gate function)
+├── auditor-prompt.md                 # Template versionado pra dispatch via Task tool
+├── checks/                           # Progressive disclosure por domínio
+│   ├── README.md                     #   Roteamento (qual check carregar)
+│   ├── docs.md                       #   README, CHANGELOG, /docs
+│   ├── ui-copy.md                    #   labels, botões, mensagens, headlines
+│   ├── data-numbers.md               #   preços, datas, contagens, percentuais
+│   ├── integrations.md               #   Stripe, OAuth, webhooks, APIs externas
+│   └── features-flows.md             #   features e fluxos anunciados
+├── references/                       # Guias profundos
+│   ├── source-of-truth-priority.md   #   11 níveis de fontes de verdade
+│   ├── congruence-checklist.md       #   Checklist por natureza da claim
+│   ├── severity-rubric.md            #   4 níveis de severidade
+│   ├── claim-extraction-guide.md     #   5 técnicas de extração
+│   └── report-format.md              #   Template do relatório
+├── examples/                         # Reviews completas (estudos de caso)
+│   ├── payment-system-review.md      #   Ex: Sistema de Pagamento Stripe
+│   ├── api-documentation-review.md   #   Ex: API REST + Documentação
+│   ├── onboarding-permissions-review.md  # Ex: Onboarding + Permissões
+│   └── setup-config-review.md        #   Ex: Setup + Configuração
+├── hooks/                            # OPCIONAL: auto-suggestion via harness
+│   ├── INSTALL.md                    #   Como ativar
+│   ├── hooks.example.json            #   Stop + PostToolUse
+│   └── mark-edit.sh                  #   PostToolUse helper
 └── scripts/
-    └── scan-changed-files.sh             # Scanner git de arquivos modificados
+    └── scan-changed-files.sh         # Scanner git de arquivos modificados
 ```
+
+## Auto-suggestion (opcional)
+
+A skill funciona via invocação manual (`/congruence`). Para que o harness **sugira automaticamente** rodar `congruence` ao fim de turnos que tocaram README/docs/copy, veja [hooks/INSTALL.md](hooks/INSTALL.md).
+
+Não está no ecossistema mainstream ainda — é diferencial real desta skill.
+
+## Dispatch de subagente auditor
+
+Quando o escopo da auditoria é grande (release notes longas, página inteira, múltiplas áreas), a skill pode dispatchar um **subagente fresco** via Task tool com o template em [auditor-prompt.md](auditor-prompt.md). Útil pra evitar viés de auto-confirmação do agente que gerou as claims.
+
+Default é **inline** (mais barato). Opt-in via `/congruence --dispatch-agent` ou a skill perguntará automaticamente quando detectar escopo grande.
 
 ## Por que isso importa
 

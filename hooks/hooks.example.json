@@ -1,0 +1,28 @@
+{
+  "_comment": "Hooks OPCIONAIS para auto-suggestion da skill congruence. Copie para .claude/settings.local.json ou merge com sua config existente. Veja hooks/INSTALL.md para instruções.",
+
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PROJECT_DIR}/.claude/skills/congruence/hooks/mark-edit.sh\""
+          }
+        ]
+      }
+    ],
+
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Você é um gate de qualidade. Verifique se o arquivo `${CLAUDE_PROJECT_DIR}/.claude/state/congruence-pending` existe. SE EXISTIR: retorne JSON {\"ok\": false, \"reason\": \"Houve edits nesta sessão que tocaram texto user-facing (README, docs, copy, ou similar). Antes de encerrar, invoque a skill /congruence para auditar se as claims/copy batem com o código. Quando concluir, delete o arquivo .claude/state/congruence-pending para liberar o turno.\"}. SE NÃO EXISTIR: retorne {\"ok\": true}. Atenção: se stop_hook_active for true, retorne {\"ok\": true} para evitar loop infinito."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -96,22 +96,18 @@ Claude Skill local e **confidencial** para auditoria de congruência semântica 
 
 ## Pendências
 
-### Obrigatório
-1. **`chmod +x` no script** — não foi possível executar via terminal nesta sessão (workspace validation):
-   ```bash
-   chmod +x "/Users/brunnocarpena/Documents/BMC MÍDIA/Windsurf/.claude/skills/congruence/scripts/scan-changed-files.sh"
-   ```
+### Resolvidas na v3 (2026-05-17)
 
-### Recomendado
-2. **Renomear arquivos de exemplo** — nomes antigos não refletem o conteúdo novo:
-   - `faq-congruence-review.md` → `payment-system-review.md`
-   - `landing-page-congruence-review.md` → `api-documentation-review.md`
-   - `dashboard-congruence-review.md` → `onboarding-permissions-review.md`
-   - `documentation-congruence-review.md` → `setup-config-review.md`
+- ✅ `chmod +x` em scripts e hooks
+- ✅ Arquivos de exemplo renomeados (payment-system, api-documentation, onboarding-permissions, setup-config)
+- ✅ Skill publicada como repo público: `github.com/xBelowZero/congruence`
 
-3. **Testar com caso real** — invocar a skill em uma sessão onde o agente criou/modificou algo e verificar se o workflow genérico funciona
+### Abertas
 
-4. **Avaliar se precisa de mais exemplos** — conforme novos cenários forem testados
+1. **Testar com caso real** — invocar `/congruence` numa sessão real e verificar se o workflow novo (v3) funciona como esperado
+2. **Avaliar adoção de hooks opcionais** — só recomendar pra usuários que invocaram `/congruence` várias vezes manualmente
+3. **Considerar empacotar como plugin Anthropic marketplace** — quando atingir massa crítica de usuários
+4. **Eventualmente**: traduzir SKILL.md pra EN para alcance maior
 
 ---
 
