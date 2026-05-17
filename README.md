@@ -35,15 +35,17 @@ Agentes AI alucinam, geram código que parece correto mas descreve algo que não
 ```bash
 cd seu-projeto/
 mkdir -p .claude/skills
-git clone https://github.com/xBelowZero/congruence.git .claude/skills/congruence
+git clone https://github.com/xBelowZero/claude-skill-congruence.git .claude/skills/congruence
 ```
 
 ### Como skill global (todos os projetos)
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/xBelowZero/congruence.git ~/.claude/skills/congruence
+git clone https://github.com/xBelowZero/claude-skill-congruence.git ~/.claude/skills/congruence
 ```
+
+> **Nota:** o diretório local fica `.claude/skills/congruence/` (sem prefixo) porque o nome da skill — o que você invoca com `/congruence` — é definido pelo campo `name:` no `SKILL.md`, não pelo nome do repo. O prefixo `claude-skill-` é só pra discoverability no GitHub.
 
 ### Como plugin de marketplace
 

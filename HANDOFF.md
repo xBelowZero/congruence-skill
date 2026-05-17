@@ -113,7 +113,9 @@ Claude Skill local e **confidencial** para auditoria de congruência semântica 
 
 ## Status de publicação
 
-> **PÚBLICO** (a partir de 2026-05-17). A skill foi publicada como repositório aberto em `github.com/xBelowZero/congruence` sob licença MIT. Antes era marcada como confidencial; essa decisão foi revertida para permitir adoção e contribuição da comunidade.
+> **PÚBLICO** (a partir de 2026-05-17). A skill foi publicada como repositório aberto em `github.com/xBelowZero/claude-skill-congruence` sob licença MIT. Antes era marcada como confidencial; essa decisão foi revertida para permitir adoção e contribuição da comunidade.
+>
+> **Nota sobre naming:** repo renomeado de `congruence` para `claude-skill-congruence` seguindo padrão de top single-skill repos (ex: `adamlyttleapps/claude-skill-aso-appstore-screenshots`). O nome da skill em si (invocação `/congruence`) permanece `congruence` — definido pelo campo `name:` no `SKILL.md`.
 
 ---
 
