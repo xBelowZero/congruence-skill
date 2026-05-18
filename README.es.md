@@ -29,14 +29,22 @@ Todo esto **pasa cualquier revisión técnica de código** porque el código com
 
 | Plataforma | Adaptador | Estado |
 |------------|-----------|--------|
-| **Claude Code** (CLI / IDE / web) | `SKILL.md` raíz | ✅ Primario |
+| **Claude Code** (CLI / IDE / web) | `SKILL.md` raíz | ✅ Principal |
 | **Cursor** | [`adapters/cursor/`](adapters/cursor/) | ✅ Soportado |
-| **GitHub Copilot CLI** | [`adapters/github-copilot/`](adapters/github-copilot/) | ✅ Soportado |
+| **GitHub Copilot** | [`adapters/copilot/`](adapters/copilot/) | ✅ Soportado |
 | **Gemini CLI / Antigravity** | [`adapters/gemini/`](adapters/gemini/) | ✅ Soportado |
-| **OpenAI Codex CLI** | [`adapters/openai-codex/`](adapters/openai-codex/) | ✅ Soportado |
+| **OpenAI Codex CLI** | [`adapters/codex/`](adapters/codex/) | ✅ Soportado |
 | **Aider** | [`adapters/aider/`](adapters/aider/) | ✅ Soportado |
-| **LLM genérico** (ChatGPT, Claude.ai, cualquier chat) | [`adapters/generic-prompt/`](adapters/generic-prompt/) | ✅ Soportado |
-
+| **Qwen Code CLI** (Alibaba) | [`adapters/qwen/`](adapters/qwen/) | ✅ Soportado |
+| **Kimi K2** (Moonshot AI) | [`adapters/kimi/`](adapters/kimi/) | ✅ Soportado |
+| **Windsurf** (Codeium) | [`adapters/windsurf/`](adapters/windsurf/) | ✅ Soportado |
+| **Cline** (VS Code) | [`adapters/cline/`](adapters/cline/) | ✅ Soportado |
+| **Continue.dev** | [`adapters/continue/`](adapters/continue/) | ✅ Soportado |
+| **Zed Editor** | [`adapters/zed/`](adapters/zed/) | ✅ Soportado |
+| **JetBrains Junie** | [`adapters/jetbrains-junie/`](adapters/jetbrains-junie/) | ✅ Soportado |
+| **Sourcegraph Cody** | [`adapters/cody/`](adapters/cody/) | ✅ Soportado |
+| **ChatGPT Custom GPT** | [`adapters/chatgpt-custom-gpt/`](adapters/chatgpt-custom-gpt/) | ✅ Soportado |
+| **LLM genérico** (ChatGPT.com, Claude.ai, cualquier chat) | [`adapters/generic-prompt/`](adapters/generic-prompt/) | ✅ Soportado |
 Cada adaptador tiene su propio `INSTALL.md` con pasos específicos de la plataforma.
 
 ## Install rápido (Claude Code)

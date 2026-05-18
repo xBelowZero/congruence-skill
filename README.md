@@ -31,12 +31,20 @@ All of this **passes any technical code review** because the code compiles and r
 |----------|---------|--------|
 | **Claude Code** (CLI / IDE / web) | root `SKILL.md` | ✅ Primary |
 | **Cursor** | [`adapters/cursor/`](adapters/cursor/) | ✅ Supported |
-| **GitHub Copilot CLI** | [`adapters/github-copilot/`](adapters/github-copilot/) | ✅ Supported |
+| **GitHub Copilot** | [`adapters/copilot/`](adapters/copilot/) | ✅ Supported |
 | **Gemini CLI / Antigravity** | [`adapters/gemini/`](adapters/gemini/) | ✅ Supported |
-| **OpenAI Codex CLI** | [`adapters/openai-codex/`](adapters/openai-codex/) | ✅ Supported |
+| **OpenAI Codex CLI** | [`adapters/codex/`](adapters/codex/) | ✅ Supported |
 | **Aider** | [`adapters/aider/`](adapters/aider/) | ✅ Supported |
-| **Generic LLM** (ChatGPT, Claude.ai, any chat) | [`adapters/generic-prompt/`](adapters/generic-prompt/) | ✅ Supported |
-
+| **Qwen Code CLI** (Alibaba) | [`adapters/qwen/`](adapters/qwen/) | ✅ Supported |
+| **Kimi K2** (Moonshot AI) | [`adapters/kimi/`](adapters/kimi/) | ✅ Supported |
+| **Windsurf** (Codeium) | [`adapters/windsurf/`](adapters/windsurf/) | ✅ Supported |
+| **Cline** (VS Code) | [`adapters/cline/`](adapters/cline/) | ✅ Supported |
+| **Continue.dev** | [`adapters/continue/`](adapters/continue/) | ✅ Supported |
+| **Zed Editor** | [`adapters/zed/`](adapters/zed/) | ✅ Supported |
+| **JetBrains Junie** | [`adapters/jetbrains-junie/`](adapters/jetbrains-junie/) | ✅ Supported |
+| **Sourcegraph Cody** | [`adapters/cody/`](adapters/cody/) | ✅ Supported |
+| **ChatGPT Custom GPT** | [`adapters/chatgpt-custom-gpt/`](adapters/chatgpt-custom-gpt/) | ✅ Supported |
+| **Generic LLM** (ChatGPT.com, Claude.ai, any chat) | [`adapters/generic-prompt/`](adapters/generic-prompt/) | ✅ Supported |
 Each adapter has its own `INSTALL.md` with platform-specific steps.
 
 ## Quick install (Claude Code)
