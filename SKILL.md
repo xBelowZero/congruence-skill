@@ -1,178 +1,182 @@
 ---
 name: congruence
-description: Use sempre que estiver prestes a declarar trabalho como concluído, fazer commit, abrir PR, atualizar README/CHANGELOG/docs, ou subir uma mudança que afete texto user-facing — audita se o que o agente disse, escreveu ou documentou realmente bate com o que o código faz. Use proativamente antes de QUALQUER claim de conclusão. TRIGGER quando o agente usar frases como "agora suporta", "implementado", "funciona", "está pronto", "corrigido", "adicionado"; quando arquivos modificados incluírem README, CHANGELOG, docs/, help-center, FAQ, landing page, copy de UI, ou prompt de IA; antes de release/deploy. SKIP quando a mudança for apenas formatação, bump de versão de dependência, refactor interno sem texto user-facing tocado, ou alterações exclusivas em arquivos de teste.
-argument-hint: [escopo?] [--dispatch-agent?]
+description: Use whenever you are about to declare work complete, commit, open a PR, update README/CHANGELOG/docs, or ship a change that affects user-facing text — audits whether what the agent said, wrote, or documented actually matches what the code does. Use proactively before ANY completion claim. TRIGGER when the agent uses phrases like "now supports", "implemented", "works", "ready", "fixed", "added"; when modified files include README, CHANGELOG, docs/, help-center, FAQ, landing page, UI copy, or AI prompts; before release/deploy. SKIP when changes are formatting-only, dependency version bumps, internal refactors with no user-facing text touched, or test-only changes.
+argument-hint: [scope?] [--dispatch-agent?]
 allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git status:*), Bash(git log:*), Bash(scripts/scan-changed-files.sh:*), Task
 ---
 
 # Congruence
 
-Audita se o que foi dito, escrito ou documentado pelo agente bate com o que o código realmente faz. **Não é code review técnico.** É auditoria de **verdade semântica**.
+Audits whether what the agent said, wrote, or documented matches what the code actually does. **This is not technical code review.** It is an audit of **semantic truth**.
 
-**Core principle:** Nenhuma afirmação sobre o projeto é verdadeira sem evidência no próprio projeto.
+**Core principle:** No claim about the project is true without evidence in the project itself.
 
-**Violar a letra desta regra é violar o espírito dela.** Texto recém-criado pelo agente nunca é fonte de verdade — nem com qualificadores como "provavelmente", "deve estar", "presumi que".
+**Violating the letter of this rule is violating the spirit of it.** Text the agent just generated is never a source of truth — not even with hedges like "probably", "should be", "I assumed that".
 
 ## The Iron Law
 
 ```
-NENHUMA CLAIM USER-FACING SEM EVIDÊNCIA DE GROUND-TRUTH
+NO USER-FACING CLAIM WITHOUT GROUND-TRUTH EVIDENCE
 ```
 
-Se você escreveu "agora o app faz X" e não pode apontar para o arquivo/teste/rota que prova X, você **não pode** publicar essa claim. Downgrade para "planejado", "parcial" ou remova.
+If you wrote "the app now does X" and you cannot point to the file/test/route that proves X, you **cannot** publish that claim. Downgrade it to "planned", "partial", or remove it.
 
-## Gate Function — antes de qualquer claim ou doc edit
+## Gate Function — before any claim or doc edit
 
-Execute em ordem. Cada passo bloqueia o próximo se incompleto.
+Execute in order. Each step blocks the next if incomplete.
 
-1. **EXTRAIR** — liste cada claim concreta no output ("suporta X", "corrigi Y", "agora exibe Z"). Use [references/claim-extraction-guide.md](references/claim-extraction-guide.md) se precisar de técnicas.
-2. **MAPEAR** — para cada claim, aponte arquivo:linha/teste/rota que prova. Sem alvo? Marque como `não verificável`.
-3. **AUDITAR** — para cada claim sem prova: **delete** ou **downgrade** para "planejado/parcial/em progresso".
-4. **CROSS-CHECK** — garanta que terminologia em docs bate com código (nome de função, env var, rota, label).
-5. **EMITIR** — só agora gere a mensagem/commit/PR/release notes.
+1. **EXTRACT** — list every concrete claim in the output ("supports X", "fixed Y", "now displays Z"). See [references/claim-extraction-guide.md](references/claim-extraction-guide.md) if you need techniques.
+2. **MAP** — for each claim, point to file:line/test/route that proves it. No target? Mark as `unverifiable`.
+3. **AUDIT** — for each unproven claim: **delete** or **downgrade** to "planned/partial/in-progress".
+4. **CROSS-CHECK** — ensure terminology in docs matches code (function names, env vars, routes, labels).
+5. **EMIT** — only now generate the message/commit/PR/release notes.
 
-## Tabela de evidência por tipo de claim
+## Evidence table by claim type
 
-| Claim | Requer | Não é suficiente |
-|-------|--------|------------------|
-| "Agora suporta X" | Teste passando + nome de função/rota grepável | "Adicionei TODO", "scaffolding existe" |
-| "Corrigi bug Y" | Teste vermelho → verde (red-green) | "Mudei o código, parece certo" |
-| "README diz X" | grep README + grep código, ambos contêm X | edit no README sozinho |
-| "Renomeei Y para Z" | grep no repo inteiro: 0 ocorrências de Y | renomeado em 1 arquivo |
-| "Removi feature W" | grep código + README + testes → 0 ocorrências | removido só do código |
-| "Integra com Stripe/X" | Código + env var + handler/webhook configurado | mock ou comentário "TODO Stripe" |
-| "Preço/data/número X" | grep do valor literal no source (config, db seed, ou hard-coded) | número apareceu só na copy gerada |
-| "Tem X opções no select" | Componente lista exatamente X items, não mock | "deve ter umas X opções" |
+| Claim | Requires | Not sufficient |
+|-------|----------|----------------|
+| "Now supports X" | Passing test + greppable function/route name | "Added a TODO", "scaffolding exists" |
+| "Fixed bug Y" | Failing test → passing test (red-green) | "Code changed, looks correct" |
+| "README says X" | grep README + grep code, both contain X | README edit alone |
+| "Renamed Y to Z" | grep entire repo: 0 occurrences of Y | Renamed in 1 file |
+| "Removed feature W" | grep code + README + tests → 0 occurrences | Removed from code only |
+| "Integrates with Stripe/X" | Code + env var + handler/webhook configured | mock or `// TODO: integrate Stripe` |
+| "Price/date/number X" | grep the literal value in source (config, db seed, or hard-coded) | Number appears only in generated copy |
+| "Has X options in select" | Component lists exactly X items, not mock | "should have around X options" |
 
-Guia mais profundo: [references/source-of-truth-priority.md](references/source-of-truth-priority.md)
+Deeper guide: [references/source-of-truth-priority.md](references/source-of-truth-priority.md)
 
 ## Red Flags — STOP
 
-Se você se pegar pensando ou escrevendo:
+If you catch yourself thinking or writing:
 
-- "deve funcionar", "provavelmente está", "presumi que", "tá implícito"
-- Escrevendo README **antes** do código (ou após, sem reler o código)
-- Colando descrição de PR gerada por LLM sem grep
-- "Vou mencionar X nos docs, o usuário descobre o nome exato"
-- Mudando nome de função sem grep no repo inteiro
-- Status report inclui feature implementada "antes na sessão" sem re-verificar
-- `package.json`/`README` descrevem algo diferente do que o entry point realmente faz
-- Copy de marketing/LP promete benefício que não tem código por trás
+- "should work", "probably is", "I assumed that", "it's implicit"
+- Writing README **before** the code (or after, without re-reading the code)
+- Pasting an LLM-generated PR description without grep
+- "I'll mention X in the docs, the user figures out the exact spelling"
+- Renaming a function without grep across the entire repo
+- Status report includes a feature implemented "earlier in the session" without re-verifying
+- `package.json`/`README` describe something different from what the entry point actually does
+- Marketing/landing copy promises a benefit with no code behind it
 
-→ PARE. Volte ao passo 1 do Gate Function.
+→ STOP. Return to step 1 of the Gate Function.
 
-## Tabela Excuse | Reality
+## Excuse | Reality table
 
-| Desculpa | Realidade |
-|----------|-----------|
-| "O usuário corrige o README depois" | Claim publicada = claim feita. Verifique ou remova. |
-| "Tá perto o suficiente" | Perto ≠ verdade. Código é binário, claim também. |
-| "São só docs" | Docs **são** o produto para agentes downstream. |
-| "A intenção tá clara" | Intenção ≠ implementação. Audite a implementação. |
-| "Tô descrevendo o design, não o estado atual" | Então diga "planejado", não use presente. |
-| "Espírito da mudança tá certo" | Letra É o espírito. Audite o diff real. |
-| "Só essa vez" | Não tem só-essa-vez. Toda claim audita. |
+| Excuse | Reality |
+|--------|---------|
+| "The user fixes the README later" | A published claim = a made claim. Verify or remove. |
+| "Close enough" | Close ≠ true. Code is binary, claim is too. |
+| "It's just docs" | Docs **are** the product for downstream agents. |
+| "The intent is clear" | Intent ≠ implementation. Audit the implementation. |
+| "I'm describing the design, not current state" | Then say "planned", don't use present tense. |
+| "Spirit of the change is right" | The letter IS the spirit. Audit the actual diff. |
+| "Just this once" | There is no just-this-once. Every claim gets audited. |
 
 ## Workflow
 
-### 1. Identificar escopo
+### 1. Identify scope
 
 ```bash
 bash scripts/scan-changed-files.sh
 ```
 
-Ou git diff direto. Liste arquivos criados/modificados na sessão.
+Or use git diff directly. List files created/modified in the session.
 
-Se `$ARGUMENTS` contém um escopo específico (ex: `/congruence headlines`, `/congruence pricing`), filtre apenas arquivos/áreas que casam com o escopo.
+If `$ARGUMENTS` contains a specific scope (e.g. `/congruence headlines`, `/congruence pricing`), filter only files/areas matching the scope.
 
-### 2. Extrair claims
+### 2. Extract claims
 
-Leia cada output da sessão e cada arquivo modificado. Transforme afirmações implícitas e explícitas em claims objetivas. Guia: [references/claim-extraction-guide.md](references/claim-extraction-guide.md).
+Read each session output and each modified file. Transform implicit and explicit statements into objective claims. Guide: [references/claim-extraction-guide.md](references/claim-extraction-guide.md).
 
-### 3. Buscar evidência
+### 3. Search for evidence
 
-Para cada claim, busque a fonte de verdade na hierarquia (executável > rotas/handlers > schemas > testes > config > UI > mocks > docs > README > comentários > texto do agente).
+For each claim, look for the source of truth in the hierarchy (executable > routes/handlers > schemas > tests > config > UI > mocks > docs > README > comments > agent text).
 
-### 4. Classificar
+### 4. Classify
 
-| Status | Significado |
-|--------|-------------|
-| `congruente` | Evidência confirma |
-| `incongruente` | Evidência contradiz |
-| `parcialmente congruente` | Parte certa, omissões importantes |
-| `não verificável` | Sem evidência suficiente |
+| Status | Meaning |
+|--------|---------|
+| `congruent` | Evidence confirms |
+| `incongruent` | Evidence contradicts |
+| `partially congruent` | Part correct, important omissions |
+| `unverifiable` | Insufficient evidence |
 
-Severidade: [references/severity-rubric.md](references/severity-rubric.md).
+Severity: [references/severity-rubric.md](references/severity-rubric.md).
 
-### 5. Relatório
+### 5. Report
 
-Template obrigatório: [references/report-format.md](references/report-format.md).
+Mandatory template: [references/report-format.md](references/report-format.md).
 
-### 6. Decisão pré-deploy
+### 6. Pre-deploy decision
 
-- Qualquer `crítico` → **não aprovar**
-- `alto` não resolvido → **não aprovar**
-- Muitos `não verificável` em áreas essenciais → **exigir revisão manual**
-- Apenas `médio`/`baixo` → **aprovar com ressalvas**
-- Tudo `congruente` → **aprovar**
+- Any `critical` → **do not approve**
+- Unresolved `high` → **do not approve**
+- Many `unverifiable` in essential areas → **require manual review**
+- Only `medium`/`low` → **approve with caveats**
+- All `congruent` → **approve**
 
-## Dispatch de subagente auditor (opcional)
+## Auditor subagent dispatch (optional)
 
-Se o escopo é grande (auditoria de página inteira, release notes longas, múltiplas áreas), o agente atual pode estar enviesado por ter gerado as claims. **Dispatchar um subagente fresco evita auto-confirmação.**
+When scope is large (full-page audit, long release notes, multiple areas), the current agent may be biased from generating the claims. **Dispatching a fresh subagent avoids self-confirmation.**
 
-**Quando perguntar ao usuário se quer dispatch:**
-- Mais de 5 claims a auditar
-- Mudanças tocam 3+ domínios distintos (docs + UI + integrações, por exemplo)
-- Release notes ou PR description com mais de 200 linhas
-- Usuário disse "audite tudo" sem especificar escopo
+**When to ask the user about dispatch:**
+- More than 5 claims to audit
+- Changes touch 3+ distinct domains (docs + UI + integrations, for example)
+- Release notes or PR description longer than 200 lines
+- User said "audit everything" without specifying scope
 
-**Como perguntar:**
+**How to ask:**
 
-> "Detectei N claims em M áreas. Quer que eu dispare um subagente especialista pra auditar em paralelo? (sim/não/só essa parte)"
+> "I detected N claims across M areas. Would you like me to dispatch a specialist subagent to audit in parallel? (yes/no/just this part)"
 
-**Se usuário aceitar** (ou se invocou `/congruence --dispatch-agent`):
-- Use a Task tool com o template em [auditor-prompt.md](auditor-prompt.md)
-- Passe escopo, lista de claims extraídas, e SHAs base/head
-- Aguarde o report estruturado e consolide na decisão final
+**If user accepts** (or if invoked with `/congruence --dispatch-agent`):
+- Use the Task tool with the template in [auditor-prompt.md](auditor-prompt.md)
+- Pass scope, extracted claim list, and base/head SHAs
+- Await the structured report and consolidate into the final decision
 
-**Se rodar inline**: continue com o workflow acima.
+**If running inline**: continue with the workflow above.
 
-> **Custo oculto**: cada subagente recarrega CLAUDE.md + descriptions de skills. Dispatch é caro para auditorias pequenas. Default é inline.
+> **Hidden cost**: each subagent reloads CLAUDE.md + all skill descriptions. Dispatch is expensive for small audits. Default is inline.
 
-## Quando NÃO usar
+## When NOT to use
 
-- Code review técnico (bugs, performance, segurança) → use `requesting-code-review`
-- Verificar que código compila/testa passa → use `verification-before-completion`
-- Linting, formatação
-- Revisão isolada de testes unitários
+- Technical code review (bugs, performance, security) → use `requesting-code-review`
+- Verifying that code compiles / tests pass → use `verification-before-completion`
+- Linting, formatting
+- Isolated unit-test review
 
-## Skills relacionadas
+## Related skills
 
-- **superpowers:verification-before-completion** — verifica que o **código funciona** (testes, build). `congruence` verifica que as **claims sobre o código** batem com o código. Use os dois antes de qualquer release.
-- **superpowers:systematic-debugging** — quando uma auditoria de congruência revela "código faz X mas docs dizem Y", debuga sistematicamente em vez de só patchar a doc.
-- **superpowers:requesting-code-review** — qualidade técnica. Complementar, não substituto.
+- **superpowers:verification-before-completion** — verifies that the **code works** (tests, build). `congruence` verifies that the **claims about the code** match the code. Use both before any release.
+- **superpowers:systematic-debugging** — when a congruence audit reveals "code does X but docs say Y", debug systematically instead of just patching the doc.
+- **superpowers:requesting-code-review** — technical quality. Complementary, not a replacement.
 
-## Por que isso importa
+## Why this matters
 
-Agentes alucinam. Code review técnico não pega isso porque o código está correto — o que está errado é a **informação sobre o código**.
+Agents hallucinate. Technical code review doesn't catch this because the code is correct — what is wrong is the **information about the code**.
 
-Exemplos reais:
-- FAQ descreve fluxo de 3 passos quando na verdade são 5
-- README documenta preço R$49 mas Stripe cobra R$79
-- Landing anuncia integração com WhatsApp que não existe
-- Setup pede Node 18 mas projeto exige Node 20
-- "123 leads ativos" conta leads deletados
-- CTA diz "Garanta sua vaga gratuita" e leva a checkout de R$497
-- Headline em PT, form em ES (multi-idioma misturado)
-- Data "17 de maio de 2026" no hero, "17/05/2025" no footer
+Real examples:
+- FAQ describes a 3-step flow when it's actually 5
+- README documents price $49 but Stripe charges $79
+- Landing page announces WhatsApp integration that doesn't exist
+- Setup asks for Node 18 but project requires Node 20
+- "123 active leads" counts deleted leads
+- CTA says "Claim your free spot" and leads to a $497 checkout
+- Headline in EN, form in ES (mixed languages)
+- Date "May 17 2026" in hero, "05/17/2025" in footer
 
-Tudo isso **passa em code review técnico** porque o código compila e roda. `congruence` é a barreira contra esse tipo de erro.
+All of this **passes technical code review** because the code compiles and runs. `congruence` is the barrier against this type of error.
 
-## Regras invioláveis
+## Inviolable rules
 
-1. Texto recém-criado pelo agente **nunca** é fonte de verdade
-2. Plausibilidade **não é** prova — exige evidência concreta
-3. Sem evidência → `não verificável`, **nunca** `congruente`
-4. Issues `crítica`/`alta` **bloqueiam** deploy/merge
-5. Relatório gerado **sempre**, mesmo se tudo `congruente`
-6. **Violar a letra é violar o espírito** — sem exceções, nem "só essa vez"
+1. Text the agent just generated is **never** a source of truth
+2. Plausibility is **not** proof — concrete evidence required
+3. No evidence → `unverifiable`, **never** `congruent`
+4. `critical`/`high` issues **block** deploy/merge
+5. Report generated **always**, even if everything is `congruent`
+6. **Violating the letter is violating the spirit** — no exceptions, no "just this once"
+
+---
+
+**Languages:** 🇺🇸 English · [🇧🇷 Português](SKILL.pt-BR.md) · [🇪🇸 Español](SKILL.es.md) · [🇫🇷 Français](SKILL.fr.md) · [🇩🇪 Deutsch](SKILL.de.md) · [🇨🇳 中文](SKILL.zh.md)
