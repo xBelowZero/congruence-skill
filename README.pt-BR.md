@@ -1,165 +1,139 @@
-# congruence
+# congruence-skill
 
-> Claude Code skill for **semantic congruence auditing** — verifies that what an agent says, writes, or documents actually matches what the project does.
+> **Auditoria de congruência semântica para agentes de IA.** Verifica se o que um agente AI diz, escreve ou documenta corresponde de fato ao que o projeto faz. Não é code review técnico — checa se as afirmações sobre o código são verdadeiras.
 
-Skill em português para auditoria de congruência semântica entre os outputs de agentes AI e a realidade do projeto. **Não é code review técnico.** Verifica se o que foi dito, escrito, documentado ou exibido corresponde ao que o projeto realmente faz.
+**Idiomas:** [🇺🇸 English](README.md) · 🇧🇷 Português · [🇪🇸 Español](README.es.md) · [🇫🇷 Français](README.fr.md) · [🇩🇪 Deutsch](README.de.md) · [🇨🇳 中文](README.zh.md)
 
 ---
 
 ## O que é
 
-Agentes AI alucinam, geram código que parece correto mas descreve algo que não existe, ou escrevem documentação desalinhada do código real. `congruence` é uma skill que audita esse tipo de erro — o que chamamos de **incongruência semântica**.
+Agentes AI alucinam. Geram código que parece correto mas descreve coisas que não existem, escrevem README desalinhado do código real, ou inventam integrações. Esta skill audita essa classe de erro — **incongruência semântica**.
 
-**Princípio central:**
+**Princípio central:** Nenhuma afirmação sobre o projeto é verdadeira sem evidência no próprio projeto.
 
-> Nenhuma afirmação sobre o projeto é verdadeira sem evidência no próprio projeto. Se a única evidência é o texto que o agente acabou de escrever, o item é `não verificável`, nunca `congruente`.
+## O que pega
 
-## Quando usar
+- FAQ descreve fluxo de 3 passos quando na verdade são 5
+- README documenta preço R$49 mas Stripe cobra R$79
+- Landing anuncia "integração Stripe" que é só um `// TODO`
+- Setup pede Node 18 mas projeto exige Node 20
+- "123 leads ativos" conta leads deletados
+- CTA "Garanta seu lugar grátis" leva a checkout de R$497
+- Função renomeada em 1 arquivo, 47 callsites quebrados
+- Doc diz que feature existe, só um mock retorna `success`
 
-- Antes de fazer commit/merge de mudanças que envolvem texto user-facing, documentação ou UI
-- Depois que um agente AI gerou FAQ, README, copy de landing page, ou documentação técnica
-- Antes de deploy de qualquer feature nova
-- Quando você desconfia que o agente "inventou" um comportamento que não está no código
-- Para auditar drift entre documentação e implementação após refactors
+Tudo isso **passa em qualquer code review técnico** porque o código compila e roda. `congruence` é a barreira contra essa classe de bug.
 
-## Quando **não** usar
+## Plataformas AI suportadas
 
-- Code review técnico (bugs, performance, segurança) — use outras skills
-- Linting/formatação
-- Revisão de testes unitários isoladamente
+| Plataforma | Adapter | Status |
+|------------|---------|--------|
+| **Claude Code** (CLI / IDE / web) | `SKILL.md` raiz | ✅ Primário |
+| **Cursor** | [`adapters/cursor/`](adapters/cursor/) | ✅ Suportado |
+| **GitHub Copilot** | [`adapters/copilot/`](adapters/copilot/) | ✅ Suportado |
+| **Gemini CLI / Antigravity** | [`adapters/gemini/`](adapters/gemini/) | ✅ Suportado |
+| **OpenAI Codex CLI** | [`adapters/codex/`](adapters/codex/) | ✅ Suportado |
+| **Aider** | [`adapters/aider/`](adapters/aider/) | ✅ Suportado |
+| **Qwen Code CLI** (Alibaba) | [`adapters/qwen/`](adapters/qwen/) | ✅ Suportado |
+| **Kimi K2** (Moonshot AI) | [`adapters/kimi/`](adapters/kimi/) | ✅ Suportado |
+| **Windsurf** (Codeium) | [`adapters/windsurf/`](adapters/windsurf/) | ✅ Suportado |
+| **Cline** (VS Code) | [`adapters/cline/`](adapters/cline/) | ✅ Suportado |
+| **Continue.dev** | [`adapters/continue/`](adapters/continue/) | ✅ Suportado |
+| **Zed Editor** | [`adapters/zed/`](adapters/zed/) | ✅ Suportado |
+| **JetBrains Junie** | [`adapters/jetbrains-junie/`](adapters/jetbrains-junie/) | ✅ Suportado |
+| **Sourcegraph Cody** | [`adapters/cody/`](adapters/cody/) | ✅ Suportado |
+| **ChatGPT Custom GPT** | [`adapters/chatgpt-custom-gpt/`](adapters/chatgpt-custom-gpt/) | ✅ Suportado |
+| **LLM genérico** (ChatGPT.com, Claude.ai, qualquer chat) | [`adapters/generic-prompt/`](adapters/generic-prompt/) | ✅ Suportado |
 
-## Instalação
+Cada adapter tem seu próprio `INSTALL.md` com passos específicos por plataforma.
 
-### Como skill de projeto (recomendado)
+## Instalação rápida (Claude Code)
 
 ```bash
+# Projeto local (recomendado)
 cd seu-projeto/
 mkdir -p .claude/skills
-git clone https://github.com/xBelowZero/claude-skill-congruence.git .claude/skills/congruence
-```
+git clone https://github.com/xBelowZero/congruence-skill.git .claude/skills/congruence
 
-### Como skill global (todos os projetos)
-
-```bash
+# Ou global (todos os projetos)
 mkdir -p ~/.claude/skills
-git clone https://github.com/xBelowZero/claude-skill-congruence.git ~/.claude/skills/congruence
+git clone https://github.com/xBelowZero/congruence-skill.git ~/.claude/skills/congruence
 ```
 
-> **Nota:** o diretório local fica `.claude/skills/congruence/` (sem prefixo) porque o nome da skill — o que você invoca com `/congruence` — é definido pelo campo `name:` no `SKILL.md`, não pelo nome do repo. O prefixo `claude-skill-` é só pra discoverability no GitHub.
+Invoque numa sessão: `/congruence` ou "audite a congruência do trabalho desta sessão".
 
-### Como plugin de marketplace
+Para outras plataformas, veja o `adapters/<plataforma>/INSTALL.md` correspondente.
 
-Em breve. Por ora, use git clone.
-
-## Uso
-
-Em uma sessão Claude Code, invoque a skill:
-
-```
-/congruence
-```
-
-Ou peça em linguagem natural:
-
-```
-audite a congruência do que foi feito nesta sessão
-```
-
-A skill executa um workflow de 6 passos:
+## Como funciona
 
 1. Identifica arquivos modificados na sessão
-2. Extrai claims verificáveis dos outputs
-3. Busca evidência nas fontes de verdade do projeto
-4. Compara e classifica cada claim
+2. Extrai claims verificáveis dos outputs do agente
+3. Busca evidência na hierarquia de fontes de verdade
+4. Classifica cada claim: `congruent` / `incongruent` / `partial` / `unverifiable`
 5. Gera relatório estruturado
-6. Emite decisão pré-deploy (aprovar / aprovar com ressalvas / não aprovar)
+6. Emite decisão pré-deploy
 
-## Estrutura
-
-```
-congruence/
-├── SKILL.md                          # Workflow + Iron Law + tabelas (gate function)
-├── auditor-prompt.md                 # Template versionado pra dispatch via Task tool
-├── checks/                           # Progressive disclosure por domínio
-│   ├── README.md                     #   Roteamento (qual check carregar)
-│   ├── docs.md                       #   README, CHANGELOG, /docs
-│   ├── ui-copy.md                    #   labels, botões, mensagens, headlines
-│   ├── data-numbers.md               #   preços, datas, contagens, percentuais
-│   ├── integrations.md               #   Stripe, OAuth, webhooks, APIs externas
-│   └── features-flows.md             #   features e fluxos anunciados
-├── references/                       # Guias profundos
-│   ├── source-of-truth-priority.md   #   11 níveis de fontes de verdade
-│   ├── congruence-checklist.md       #   Checklist por natureza da claim
-│   ├── severity-rubric.md            #   4 níveis de severidade
-│   ├── claim-extraction-guide.md     #   5 técnicas de extração
-│   └── report-format.md              #   Template do relatório
-├── examples/                         # Reviews completas (estudos de caso)
-│   ├── payment-system-review.md      #   Ex: Sistema de Pagamento Stripe
-│   ├── api-documentation-review.md   #   Ex: API REST + Documentação
-│   ├── onboarding-permissions-review.md  # Ex: Onboarding + Permissões
-│   └── setup-config-review.md        #   Ex: Setup + Configuração
-├── hooks/                            # OPCIONAL: auto-suggestion via harness
-│   ├── INSTALL.md                    #   Como ativar
-│   ├── hooks.example.json            #   Stop + PostToolUse
-│   └── mark-edit.sh                  #   PostToolUse helper
-└── scripts/
-    └── scan-changed-files.sh         # Scanner git de arquivos modificados
-```
-
-## Auto-suggestion (opcional)
-
-A skill funciona via invocação manual (`/congruence`). Para que o harness **sugira automaticamente** rodar `congruence` ao fim de turnos que tocaram README/docs/copy, veja [hooks/INSTALL.md](hooks/INSTALL.md).
-
-Não está no ecossistema mainstream ainda — é diferencial real desta skill.
-
-## Dispatch de subagente auditor
-
-Quando o escopo da auditoria é grande (release notes longas, página inteira, múltiplas áreas), a skill pode dispatchar um **subagente fresco** via Task tool com o template em [auditor-prompt.md](auditor-prompt.md). Útil pra evitar viés de auto-confirmação do agente que gerou as claims.
-
-Default é **inline** (mais barato). Opt-in via `/congruence --dispatch-agent` ou a skill perguntará automaticamente quando detectar escopo grande.
-
-## Por que isso importa
-
-Sem congruence review, um agente pode:
-
-- Criar um FAQ que descreve um fluxo de 3 passos quando na verdade são 5
-- Documentar um preço de R$49 quando o Stripe cobra R$79
-- Anunciar integração com WhatsApp que não existe no código
-- Escrever README com Node 18 quando o projeto exige Node 20
-- Exibir "123 leads ativos" contando leads deletados
-
-Esses erros passam em qualquer code review técnico porque o código está correto — o problema é que a **informação** está errada.
+Workflow completo: [SKILL.md](SKILL.md).
 
 ## Diferença vs. outras skills
 
 | Skill | O que verifica |
-|-------|---------------|
+|-------|----------------|
 | `congruence` | Verdade semântica: claims batem com o código? |
-| `verification-before-completion` (Superpowers) | Código funciona: testes passam, build sobe? |
-| `requesting-code-review` (Superpowers) | Qualidade técnica: bugs, padrões, manutenibilidade |
-| `systematic-debugging` (Superpowers) | Root cause de bugs reproduzíveis |
+| `verification-before-completion` | Código funciona: testes passam, build sobe |
+| `requesting-code-review` | Qualidade técnica: bugs, padrões, manutenibilidade |
+| `systematic-debugging` | Root cause de bugs reproduzíveis |
 
 Skills são complementares. `congruence` ocupa o nicho de **drift entre o que se diz e o que o código faz** — lacuna não coberta pelas demais.
+
+## Estrutura do repositório
+
+```
+congruence-skill/
+├── SKILL.md                   # Workflow + Iron Law + tabelas (EN primário)
+├── SKILL.pt-BR.md             # Português (Brasil)
+├── SKILL.es.md                # Espanhol
+├── SKILL.fr.md                # Francês
+├── SKILL.de.md                # Alemão
+├── SKILL.zh.md                # Chinês
+├── README.md / .pt-BR / .es / .fr / .de / .zh
+├── auditor-prompt.md          # Template pra dispatch de subagente (+ traduções)
+├── checks/                    # Progressive disclosure por domínio
+│   ├── docs.md                #   README, CHANGELOG, /docs
+│   ├── ui-copy.md             #   labels, botões, headlines
+│   ├── data-numbers.md        #   preços, datas, contagens
+│   ├── integrations.md        #   Stripe, OAuth, webhooks
+│   └── features-flows.md      #   features e fluxos anunciados
+├── references/                # Guias profundos
+├── examples/                  # Estudos de caso
+├── hooks/                     # OPCIONAL: auto-suggestion no Claude Code
+├── adapters/                  # Outras plataformas AI
+│   ├── cursor/
+│   ├── github-copilot/
+│   ├── gemini/
+│   ├── openai-codex/
+│   ├── aider/
+│   └── generic-prompt/
+└── scripts/
+```
 
 ## Contribuindo
 
 Issues e PRs bem-vindos. Antes de abrir PR:
 
-1. Leia `SKILL.md` para entender o workflow
-2. Se for adicionar tipo novo de check, considere se cabe em `references/` ou se merece arquivo próprio em `checks/`
+1. Leia `SKILL.md` pra entender o workflow
+2. Se for adicionar tipo novo de check, considere se cabe em `references/` ou merece arquivo próprio em `checks/`
 3. Examples devem ser **genéricos** (não específicos de stack X ou framework Y)
+4. Traduções: mantenha todas as versões de idioma em sync (PT-BR e EN são referência)
 
 ## Licença
 
 MIT — veja [LICENSE](LICENSE).
 
-## Créditos e inspiração
+## Inspiração
 
 Padrões e estrutura inspirados em:
 - [obra/superpowers](https://github.com/obra/superpowers) — especialmente `verification-before-completion` e `writing-skills`
 - [anthropics/skills](https://github.com/anthropics/skills) — `skill-creator` e best practices oficiais
 - [Anthropic Agent Skills docs](https://docs.claude.com/en/docs/claude-code/skills)
-
----
-
-**Idiomas:** [🇺🇸 English](README.md) · 🇧🇷 Português · [🇪🇸 Español](README.es.md) · [🇫🇷 Français](README.fr.md) · [🇩🇪 Deutsch](README.de.md) · [🇨🇳 中文](README.zh.md)
