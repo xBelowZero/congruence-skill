@@ -18,11 +18,13 @@
       {
         "hooks": [
           {
-            "type": "prompt",
-            "prompt": "Você é um gate de qualidade. Verifique se o arquivo `${CLAUDE_PROJECT_DIR}/.claude/state/congruence-pending` existe. SE EXISTIR: retorne JSON {\"ok\": false, \"reason\": \"Houve edits nesta sessão que tocaram texto user-facing (README, docs, copy, ou similar). Antes de encerrar, invoque a skill /congruence para auditar se as claims/copy batem com o código. Quando concluir, delete o arquivo .claude/state/congruence-pending para liberar o turno.\"}. SE NÃO EXISTIR: retorne {\"ok\": true}. Atenção: se stop_hook_active for true, retorne {\"ok\": true} para evitar loop infinito."
+            "type": "command",
+            "command": "\"${CLAUDE_PROJECT_DIR}/.claude/skills/congruence/hooks/stop-check.sh\""
           }
         ]
       }
     ]
-  }
+  },
+
+  "_global_install_note": "Para instalar GLOBAL (~/.claude/settings.json), troque ${CLAUDE_PROJECT_DIR} por $HOME nos paths dos scripts. Os scripts usam CLAUDE_PROJECT_DIR (ou $PWD como fallback) para gravar/ler o marcador no .claude/state/ do projeto atual — funcionam em qualquer cwd."
 }

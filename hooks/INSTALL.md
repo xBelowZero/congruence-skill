@@ -10,9 +10,9 @@ Dois hooks trabalham juntos:
 
 1. **`PostToolUse`** (matcher `Edit|Write|MultiEdit`) — executa `mark-edit.sh`, que verifica se o arquivo editado bate em padrões relevantes (README, /docs, /help, /components, etc.) e cria um marcador em `.claude/state/congruence-pending`.
 
-2. **`Stop`** (prompt-based) — quando Claude terminar o turno, um modelo Haiku avalia: se o marcador existe, retorna `{"ok": false, "reason": "rode /congruence antes de encerrar"}` — isso bloqueia o encerramento do turno e força Claude a invocar a skill.
+2. **`Stop`** (command) — executa `stop-check.sh`, que verifica o marcador. Se existir, retorna `{"decision": "block", "reason": "..."}` para o harness — bloqueia o encerramento do turno e força Claude a invocar a skill. Respeita `stop_hook_active` no input para evitar loops infinitos.
 
-Depois de rodar `/congruence`, **a skill deleta** o marcador para liberar o próximo Stop.
+Depois de rodar `/congruence`, **a skill (ou você) deve deletar** o marcador para liberar o próximo Stop: `rm "${CLAUDE_PROJECT_DIR}/.claude/state/congruence-pending"`.
 
 ## Instalação
 
@@ -30,7 +30,23 @@ chmod +x .claude/skills/congruence/hooks/mark-edit.sh
 
 ### Opção B — Global (todos os projetos)
 
-Edite `~/.claude/settings.json`. **Cuidado**: vai disparar em todo projeto onde tiver `.claude/skills/congruence/` instalado.
+Instale a skill em `~/.claude/skills/congruence/` (`git clone https://github.com/xBelowZero/congruence-skill.git ~/.claude/skills/congruence`), depois edite `~/.claude/settings.json` adicionando os hooks com path absoluto:
+
+```jsonc
+"PostToolUse": [
+  {
+    "matcher": "Edit|Write|MultiEdit",
+    "hooks": [{ "type": "command", "command": "/Users/SEU_USER/.claude/skills/congruence/hooks/mark-edit.sh" }]
+  }
+],
+"Stop": [
+  {
+    "hooks": [{ "type": "command", "command": "/Users/SEU_USER/.claude/skills/congruence/hooks/stop-check.sh" }]
+  }
+]
+```
+
+Os scripts usam `CLAUDE_PROJECT_DIR` (ou `$PWD` como fallback) para o marcador — funcionam em qualquer projeto.
 
 ### Opção C — Sem hooks
 
