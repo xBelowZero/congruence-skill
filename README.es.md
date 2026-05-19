@@ -2,7 +2,7 @@
 
 > **Auditoría de congruencia semántica para agentes de IA de coding.** Verifica que lo que un agente de IA dice, escribe o documenta realmente coincida con lo que el proyecto hace. No es revisión técnica de código — chequea si las afirmaciones sobre el código son verdaderas.
 
-**Idiomas:** [🇺🇸 English](README.md) · [🇧🇷 Português](README.pt-BR.md) · 🇪🇸 Español · [🇫🇷 Français](README.fr.md) · [🇩🇪 Deutsch](README.de.md) · [🇨🇳 中文](README.zh.md)
+[🇺🇸](README.md) · [🇧🇷](README.pt-BR.md) · 🇪🇸 · [🇫🇷](README.fr.md) · [🇩🇪](README.de.md) · [🇨🇳](README.zh.md)
 
 ---
 
@@ -14,14 +14,9 @@ Los agentes de IA de coding alucinan. Generan código que parece correcto pero d
 
 ## Qué captura
 
-- El FAQ describe un flujo de 3 pasos cuando son 5
-- El README documenta precio $49 pero Stripe cobra $79
-- Landing anuncia "integración con Stripe" que es solo un `// TODO`
-- Setup pide Node 18 pero el proyecto requiere Node 20
-- "123 leads activos" cuenta leads eliminados
-- CTA "Obtén cupo gratis" lleva a checkout de $497
-- Función renombrada en 1 archivo, 47 callsites rotos
-- El doc dice que la feature existe, solo el mock devuelve `success`
+Cualquier divergencia entre lo que el agente (o los docs, UI, copy y configs del proyecto) **afirma** y lo que el código **de hecho hace** — en cualquier dominio, stack o lenguaje. Donde haya una afirmación verificable contra el código fuente, `congruence` la chequea.
+
+Algunos ejemplos ilustrativos (no exhaustivos): un FAQ describiendo un flujo de 3 pasos cuando son 5; un README documentando precio $49 mientras Stripe cobra $79; una landing anunciando "integración con Stripe" que es solo un `// TODO`; setup pidiendo Node 18 cuando el proyecto requiere Node 20; "123 leads activos" contando leads eliminados; CTA "Obtén cupo gratis" llevando a checkout de $497; función renombrada en 1 archivo con 47 callsites rotos; doc afirmando que una feature existe cuando solo un mock devuelve `success`.
 
 Todo esto **pasa cualquier revisión técnica de código** porque el código compila y corre. `congruence` es la barrera contra esta clase de bug.
 

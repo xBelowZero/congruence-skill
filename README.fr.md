@@ -2,7 +2,7 @@
 
 > **Audit de congruence sémantique pour agents de codage IA.** Vérifie si ce qu'un agent IA dit, écrit ou documente correspond réellement à ce que fait le projet. Pas une revue de code technique — vérifie si les affirmations sur le code sont vraies.
 
-**Langues :** [🇺🇸 English](README.md) · [🇧🇷 Português](README.pt-BR.md) · [🇪🇸 Español](README.es.md) · 🇫🇷 Français · [🇩🇪 Deutsch](README.de.md) · [🇨🇳 中文](README.zh.md)
+[🇺🇸](README.md) · [🇧🇷](README.pt-BR.md) · [🇪🇸](README.es.md) · 🇫🇷 · [🇩🇪](README.de.md) · [🇨🇳](README.zh.md)
 
 ---
 
@@ -14,14 +14,9 @@ Les agents de codage IA hallucinent. Ils génèrent du code qui semble correct m
 
 ## Ce qu'elle attrape
 
-- FAQ décrit un flow en 3 étapes alors que c'est 5
-- README documente un prix de 49 € mais Stripe facture 79 €
-- Landing annonce "intégration Stripe" qui n'est qu'un `// TODO`
-- Setup demande Node 18 mais le projet exige Node 20
-- "123 leads actifs" compte les leads supprimés
-- CTA "Obtenez votre place gratuite" mène à un checkout à 497 €
-- Fonction renommée dans 1 fichier, 47 callsites cassés
-- La doc dit qu'une fonctionnalité existe, seul un mock retourne `success`
+Toute divergence entre ce que l'agent (ou les docs, l'UI, la copy et les configs du projet) **affirme** et ce que le code **fait réellement** — dans n'importe quel domaine, stack ou langage. Partout où une affirmation peut être vérifiée par rapport au code source, `congruence` la contrôle.
+
+Quelques exemples illustratifs (non exhaustifs) : une FAQ décrivant un flow en 3 étapes alors qu'il en compte 5 ; un README documentant un prix de 49 € alors que Stripe facture 79 € ; une landing annonçant une "intégration Stripe" qui n'est qu'un `// TODO` ; un setup exigeant Node 18 quand le projet requiert Node 20 ; "123 leads actifs" comptant les leads supprimés ; un CTA "Obtenez votre place gratuite" menant à un checkout à 497 € ; une fonction renommée dans 1 fichier avec 47 callsites cassés ; une doc affirmant qu'une fonctionnalité existe alors que seul un mock retourne `success`.
 
 Tout cela **passe n'importe quelle revue de code technique** parce que le code compile et fonctionne. `congruence` est la barrière contre cette classe de bug.
 

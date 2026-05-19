@@ -2,7 +2,7 @@
 
 > **Semantisches Congruence-Auditing für KI-Coding-Agenten.** Verifiziert, ob das, was ein KI-Agent sagt, schreibt oder dokumentiert, tatsächlich dem entspricht, was das Projekt tut. Kein technisches Code Review — prüft, ob Behauptungen über den Code wahr sind.
 
-**Sprachen:** [🇺🇸 English](README.md) · [🇧🇷 Português](README.pt-BR.md) · [🇪🇸 Español](README.es.md) · [🇫🇷 Français](README.fr.md) · 🇩🇪 Deutsch · [🇨🇳 中文](README.zh.md)
+[🇺🇸](README.md) · [🇧🇷](README.pt-BR.md) · [🇪🇸](README.es.md) · [🇫🇷](README.fr.md) · 🇩🇪 · [🇨🇳](README.zh.md)
 
 ---
 
@@ -14,14 +14,9 @@ KI-Coding-Agenten halluzinieren. Sie generieren Code, der korrekt aussieht, aber
 
 ## Was sie abfängt
 
-- FAQ beschreibt 3-Schritt-Flow, der tatsächlich 5 Schritte hat
-- README dokumentiert Preis 49 €, aber Stripe berechnet 79 €
-- Landing kündigt "Stripe-Integration" an, die nur ein `// TODO` ist
-- Setup fordert Node 18, Projekt verlangt aber Node 20
-- "123 aktive Leads" zählt gelöschte Leads mit
-- CTA "Sichern Sie sich Ihren kostenlosen Platz" führt zu 497-€-Checkout
-- Funktion in 1 Datei umbenannt, 47 Aufruf-Stellen kaputt
-- Doc sagt Feature existiert, nur ein Mock gibt `success` zurück
+Jede Abweichung zwischen dem, was der Agent (oder die Docs, UI, Copy und Configs des Projekts) **behauptet**, und dem, was der Code **tatsächlich tut** — in jedem Bereich, Stack oder Sprache. Überall, wo eine Aussage gegen den Quellcode überprüfbar ist, prüft `congruence` sie.
+
+Einige illustrative Beispiele (nicht abschließend): eine FAQ beschreibt einen 3-Schritt-Flow, der tatsächlich 5 Schritte hat; ein README dokumentiert Preis 49 €, während Stripe 79 € berechnet; eine Landing kündigt eine "Stripe-Integration" an, die nur ein `// TODO` ist; Setup fordert Node 18, wenn das Projekt Node 20 verlangt; "123 aktive Leads" zählt gelöschte mit; CTA "Sichern Sie sich Ihren kostenlosen Platz" führt zu einem 497-€-Checkout; Funktion in 1 Datei umbenannt, 47 Aufruf-Stellen kaputt; Doc behauptet, eine Feature existiere, obwohl nur ein Mock `success` zurückgibt.
 
 All das **besteht jedes technische Code Review**, weil der Code kompiliert und läuft. `congruence` ist die Barriere gegen diese Bug-Klasse.
 

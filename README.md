@@ -2,7 +2,7 @@
 
 > **Semantic congruence auditing for AI coding agents.** Verifies that what an AI agent says, writes, or documents actually matches what the project does. Not technical code review — checks whether claims about the code are true.
 
-**Languages:** 🇺🇸 English · [🇧🇷 Português](README.pt-BR.md) · [🇪🇸 Español](README.es.md) · [🇫🇷 Français](README.fr.md) · [🇩🇪 Deutsch](README.de.md) · [🇨🇳 中文](README.zh.md)
+🇺🇸 · [🇧🇷](README.pt-BR.md) · [🇪🇸](README.es.md) · [🇫🇷](README.fr.md) · [🇩🇪](README.de.md) · [🇨🇳](README.zh.md)
 
 ---
 
@@ -14,14 +14,9 @@ AI coding agents hallucinate. They generate code that looks correct but describe
 
 ## What it catches
 
-- FAQ describes a 3-step flow when it's actually 5
-- README documents price $49 but Stripe charges $79
-- Landing announces "Stripe integration" that is only a `// TODO`
-- Setup asks for Node 18 but project requires Node 20
-- "123 active leads" counts deleted leads
-- CTA "Get free spot" leads to a $497 checkout
-- Renamed function in 1 file, 47 callsites broken
-- Doc says feature exists, only mock returns `success`
+Any divergence between what the agent (or the project's docs, UI, copy, configs) **claims** and what the code **actually does** — across any domain, stack, or language. Wherever a statement can be verified against source, `congruence` checks it.
+
+A few illustrative examples (non-exhaustive): an FAQ describing a 3-step flow that's actually 5; a README documenting price $49 while Stripe charges $79; a landing announcing a "Stripe integration" that is only a `// TODO`; setup asking for Node 18 when the project requires Node 20; "123 active leads" counting deleted ones; a CTA "Get free spot" leading to a $497 checkout; a function renamed in 1 file with 47 callsites broken; a doc claiming a feature exists when only a mock returns `success`.
 
 All of this **passes any technical code review** because the code compiles and runs. `congruence` is the barrier against this class of bug.
 
