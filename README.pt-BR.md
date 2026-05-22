@@ -49,11 +49,11 @@ Cada adapter tem seu próprio `INSTALL.md` com passos específicos por plataform
 # Projeto local (recomendado)
 cd seu-projeto/
 mkdir -p .claude/skills
-git clone https://github.com/xBelowZero/congruence-skill.git .claude/skills/congruence
+git clone https://github.com/brunnocarpena/congruence-skill.git .claude/skills/congruence
 
 # Ou global (todos os projetos)
 mkdir -p ~/.claude/skills
-git clone https://github.com/xBelowZero/congruence-skill.git ~/.claude/skills/congruence
+git clone https://github.com/brunnocarpena/congruence-skill.git ~/.claude/skills/congruence
 ```
 
 Invoque numa sessão: `/congruence` ou "audite a congruência do trabalho desta sessão".

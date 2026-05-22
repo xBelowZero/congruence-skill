@@ -46,4 +46,4 @@ If you wrote "the app now does X" and cannot point to file/test/route proving X 
 
 ## Full methodology
 
-https://github.com/xBelowZero/congruence-skill/blob/main/SKILL.md
+https://github.com/brunnocarpena/congruence-skill/blob/main/SKILL.md

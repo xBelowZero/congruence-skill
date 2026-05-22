@@ -98,4 +98,4 @@ Tell them: "Open a fresh ChatGPT chat with this same GPT and paste the same cont
 
 ## Full methodology
 
-https://github.com/xBelowZero/congruence-skill
+https://github.com/brunnocarpena/congruence-skill

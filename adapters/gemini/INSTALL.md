@@ -13,13 +13,13 @@
 Project-local (recommended):
 ```bash
 cd your-project/
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/gemini/GEMINI.md -o GEMINI.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/gemini/GEMINI.md -o GEMINI.md
 ```
 
 Global (all projects):
 ```bash
 mkdir -p ~/.gemini
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/gemini/GEMINI.md -o ~/.gemini/GEMINI.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/gemini/GEMINI.md -o ~/.gemini/GEMINI.md
 ```
 
 ## How to invoke
@@ -31,13 +31,13 @@ Verify it loaded: `/memory show` in Gemini CLI.
 ## Limitations vs Claude Code
 
 - **No hooks** — Gemini CLI has no Stop hook to auto-trigger audit.
-- **No Task tool** — to dispatch an independent auditor, open a new Gemini session and paste [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — to dispatch an independent auditor, open a new Gemini session and paste [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 - **Customize filename** via `settings.json` if your project conflicts: `"context": { "fileName": "CONGRUENCE.md" }`.
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/gemini/GEMINI.md -o GEMINI.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/gemini/GEMINI.md -o GEMINI.md
 ```
 
 ## Reference

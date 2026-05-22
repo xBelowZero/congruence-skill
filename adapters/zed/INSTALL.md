@@ -12,7 +12,7 @@
 
 ```bash
 cd your-project/
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/zed/.rules -o .rules
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/zed/.rules -o .rules
 ```
 
 > If you already have a `.rules` file, append the congruence section manually.
@@ -33,12 +33,12 @@ If you already use one of those, congruence content can go there instead.
 ## Limitations vs Claude Code
 
 - **No hooks** — Zed has no Stop hook equivalent.
-- **No Task tool** — for independent audit, open new Zed Agent thread and paste [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — for independent audit, open new Zed Agent thread and paste [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/zed/.rules -o .rules
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/zed/.rules -o .rules
 ```
 
 ## Reference

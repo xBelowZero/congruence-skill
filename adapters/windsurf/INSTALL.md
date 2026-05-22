@@ -13,7 +13,7 @@
 ```bash
 cd your-project/
 mkdir -p .windsurf/rules
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/windsurf/congruence.md -o .windsurf/rules/congruence.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/windsurf/congruence.md -o .windsurf/rules/congruence.md
 ```
 
 ## How to invoke
@@ -30,12 +30,12 @@ Other trigger modes (edit frontmatter):
 
 - **12k char limit per workspace rule** (6k global) — methodology fits comfortably.
 - **No hooks** — Windsurf has no Stop hook equivalent.
-- **No Task tool** — for independent audit, open new Cascade session and paste [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — for independent audit, open new Cascade session and paste [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/windsurf/congruence.md -o .windsurf/rules/congruence.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/windsurf/congruence.md -o .windsurf/rules/congruence.md
 ```
 
 ## Reference

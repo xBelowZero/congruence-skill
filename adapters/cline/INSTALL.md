@@ -13,7 +13,7 @@
 ```bash
 cd your-project/
 mkdir -p .clinerules
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/cline/congruence.md -o .clinerules/congruence.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/cline/congruence.md -o .clinerules/congruence.md
 ```
 
 ## How to invoke
@@ -23,13 +23,13 @@ Ambient. Cline auto-loads all files in `.clinerules/`.
 ## Limitations vs Claude Code
 
 - **No hooks** — Cline doesn't have Stop hook equivalent.
-- **No Task tool** — to dispatch a fresh auditor, open a new Cline conversation and paste [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — to dispatch a fresh auditor, open a new Cline conversation and paste [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 - **Multiple rules** can coexist in `.clinerules/` — congruence won't conflict with others.
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/cline/congruence.md -o .clinerules/congruence.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/cline/congruence.md -o .clinerules/congruence.md
 ```
 
 ## Reference

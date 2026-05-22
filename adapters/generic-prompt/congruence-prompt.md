@@ -49,7 +49,7 @@ If you wrote "the app now does X" and cannot point to file/test/route proving X 
 
 ## Full methodology
 
-For complete workflow (claim extraction guide, severity rubric, report format, auditor subagent dispatch): https://github.com/xBelowZero/congruence-skill/blob/main/SKILL.md
+For complete workflow (claim extraction guide, severity rubric, report format, auditor subagent dispatch): https://github.com/brunnocarpena/congruence-skill/blob/main/SKILL.md
 
 
 ## How to interact with me
@@ -70,4 +70,4 @@ Open a new chat session, paste this prompt again, and run a fresh audit there. I
 
 ---
 
-**Full methodology + advanced workflows:** https://github.com/xBelowZero/congruence-skill
+**Full methodology + advanced workflows:** https://github.com/brunnocarpena/congruence-skill

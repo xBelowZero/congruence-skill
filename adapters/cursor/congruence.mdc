@@ -49,7 +49,7 @@ If you wrote "the app now does X" and cannot point to file/test/route proving X 
 
 ## Full methodology
 
-For the complete workflow (claim extraction guide, severity rubric, report format, integration with auditor subagent): https://github.com/xBelowZero/congruence-skill/blob/main/SKILL.md
+For the complete workflow (claim extraction guide, severity rubric, report format, integration with auditor subagent): https://github.com/brunnocarpena/congruence-skill/blob/main/SKILL.md
 
 ## How to use in Cursor
 

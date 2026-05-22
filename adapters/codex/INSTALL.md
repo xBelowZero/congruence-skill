@@ -12,7 +12,7 @@
 
 ```bash
 cd your-project/
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/codex/AGENTS.md -o AGENTS.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/codex/AGENTS.md -o AGENTS.md
 ```
 
 If you already have an `AGENTS.md`, append the congruence section manually rather than overwriting.
@@ -24,13 +24,13 @@ Ambient. Codex auto-loads `AGENTS.md` from CWD and walks up.
 ## Limitations vs Claude Code
 
 - **No hooks** — Codex CLI cannot auto-trigger the audit at end of turn.
-- **No Task tool** — to dispatch a fresh auditor, open a new Codex session and paste [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — to dispatch a fresh auditor, open a new Codex session and paste [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 - **AGENTS.md is shared** — if other tools (Cursor, Aider) also read it, the methodology applies cross-tool (this is actually a feature).
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/codex/AGENTS.md -o AGENTS.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/codex/AGENTS.md -o AGENTS.md
 ```
 
 ## Reference

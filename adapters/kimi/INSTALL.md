@@ -13,7 +13,7 @@
 There's nothing to install. Just paste:
 
 1. Open Kimi CLI: `kimi`
-2. Copy the entire content of [`KIMI-PROMPT.md`](https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/kimi/KIMI-PROMPT.md)
+2. Copy the entire content of [`KIMI-PROMPT.md`](https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/kimi/KIMI-PROMPT.md)
 3. Paste as your first message
 4. Continue normal conversation
 

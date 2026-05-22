@@ -49,7 +49,7 @@ If you wrote "the app now does X" and cannot point to file/test/route proving X 
 
 ## Full methodology
 
-For complete workflow (claim extraction guide, severity rubric, report format, auditor subagent dispatch): https://github.com/xBelowZero/congruence-skill/blob/main/SKILL.md
+For complete workflow (claim extraction guide, severity rubric, report format, auditor subagent dispatch): https://github.com/brunnocarpena/congruence-skill/blob/main/SKILL.md
 
 
 ## How to use
@@ -58,4 +58,4 @@ At session start, paste this entire prompt. When I share code/changes and say I'
 
 ---
 
-**Full skill:** https://github.com/xBelowZero/congruence-skill
+**Full skill:** https://github.com/brunnocarpena/congruence-skill

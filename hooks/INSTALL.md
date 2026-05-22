@@ -30,7 +30,7 @@ chmod +x .claude/skills/congruence/hooks/mark-edit.sh
 
 ### Opção B — Global (todos os projetos)
 
-Instale a skill em `~/.claude/skills/congruence/` (`git clone https://github.com/xBelowZero/congruence-skill.git ~/.claude/skills/congruence`), depois edite `~/.claude/settings.json` adicionando os hooks com path absoluto:
+Instale a skill em `~/.claude/skills/congruence/` (`git clone https://github.com/brunnocarpena/congruence-skill.git ~/.claude/skills/congruence`), depois edite `~/.claude/settings.json` adicionando os hooks com path absoluto:
 
 ```jsonc
 "PostToolUse": [

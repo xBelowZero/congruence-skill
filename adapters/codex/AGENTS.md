@@ -45,7 +45,7 @@ If you wrote "the app now does X" and cannot point to file/test/route proving X 
 
 ## Full methodology
 
-For complete workflow (claim extraction guide, severity rubric, report format, auditor subagent dispatch): https://github.com/xBelowZero/congruence-skill/blob/main/SKILL.md
+For complete workflow (claim extraction guide, severity rubric, report format, auditor subagent dispatch): https://github.com/brunnocarpena/congruence-skill/blob/main/SKILL.md
 
 
 ## How to use in OpenAI Codex CLI

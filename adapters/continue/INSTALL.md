@@ -13,7 +13,7 @@
 ```bash
 cd your-project/
 mkdir -p .continue/rules
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/continue/congruence.md -o .continue/rules/congruence.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/continue/congruence.md -o .continue/rules/congruence.md
 ```
 
 ## How to invoke
@@ -29,12 +29,12 @@ globs: ["**/README*", "**/CHANGELOG*", "**/docs/**"]
 ## Limitations vs Claude Code
 
 - **No hooks** — Continue has no Stop hook equivalent.
-- **No Task tool** — for independent audit, open new Continue chat and paste [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — for independent audit, open new Continue chat and paste [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/continue/congruence.md -o .continue/rules/congruence.md
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/continue/congruence.md -o .continue/rules/congruence.md
 ```
 
 ## Reference

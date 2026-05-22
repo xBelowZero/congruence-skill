@@ -13,14 +13,14 @@
 ```bash
 cd your-project/
 mkdir -p .cursor/rules
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/cursor/congruence.mdc \
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/cursor/congruence.mdc \
   -o .cursor/rules/congruence.mdc
 ```
 
 Or clone the whole skill:
 
 ```bash
-git clone https://github.com/xBelowZero/congruence-skill.git /tmp/congruence-skill
+git clone https://github.com/brunnocarpena/congruence-skill.git /tmp/congruence-skill
 mkdir -p .cursor/rules
 cp /tmp/congruence-skill/adapters/cursor/congruence.mdc .cursor/rules/
 ```
@@ -42,13 +42,13 @@ Implement feature X. Before declaring done, follow @congruence.
 ## Limitations vs Claude Code
 
 - **No Stop hook** — Cursor cannot auto-trigger the audit at end of turn. You must mention `@congruence`.
-- **No Task tool** — to dispatch an independent auditor, open a new Cursor chat session and paste the [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — to dispatch an independent auditor, open a new Cursor chat session and paste the [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 - **`globs` field** restricts where the rule applies — adjust the frontmatter glob list to match your project's user-facing paths.
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/cursor/congruence.mdc \
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/cursor/congruence.mdc \
   -o .cursor/rules/congruence.mdc
 ```
 

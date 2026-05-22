@@ -11,7 +11,7 @@
 ## Quick install
 
 1. Open a fresh chat with your preferred LLM
-2. Copy the entire content of [`congruence-prompt.md`](https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/generic-prompt/congruence-prompt.md)
+2. Copy the entire content of [`congruence-prompt.md`](https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/generic-prompt/congruence-prompt.md)
 3. Paste it as your first message
 4. Continue normal conversation — the LLM will audit your claims
 
@@ -38,8 +38,8 @@ I want to publish this landing page: [paste]. Audit against this code: [paste].
 
 ## Updating
 
-Re-copy the latest version of [`congruence-prompt.md`](https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/generic-prompt/congruence-prompt.md) any time.
+Re-copy the latest version of [`congruence-prompt.md`](https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/generic-prompt/congruence-prompt.md) any time.
 
 ## Reference
 
-- Full skill: https://github.com/xBelowZero/congruence-skill
+- Full skill: https://github.com/brunnocarpena/congruence-skill

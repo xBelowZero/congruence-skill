@@ -14,7 +14,7 @@
 2. Tab "Configure"
 3. Name: `Congruence Auditor`
 4. Description: `Audits whether your claims about your project actually match the code`
-5. Instructions field: paste the entire content of [`instructions.md`](https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/chatgpt-custom-gpt/instructions.md)
+5. Instructions field: paste the entire content of [`instructions.md`](https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/chatgpt-custom-gpt/instructions.md)
 6. Conversation starters (optional):
    - "Audit my recent changes before I commit"
    - "Check this PR description against the code"
@@ -46,7 +46,7 @@ Verify this README against the actual code in the uploaded files.
 
 ## Updating
 
-Edit your GPT in the Builder and replace the Instructions with the latest [`instructions.md`](https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/chatgpt-custom-gpt/instructions.md).
+Edit your GPT in the Builder and replace the Instructions with the latest [`instructions.md`](https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/chatgpt-custom-gpt/instructions.md).
 
 ## Reference
 

@@ -13,7 +13,7 @@
 ```bash
 cd your-project/
 mkdir -p .github
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/copilot/copilot-instructions.md \
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/copilot/copilot-instructions.md \
   -o .github/copilot-instructions.md
 ```
 
@@ -28,13 +28,13 @@ To force the audit, ask explicitly: `audit congruence of these changes before I 
 ## Limitations vs Claude Code
 
 - **No hooks** — Copilot has no Stop/PostToolUse equivalent. The audit relies on Copilot reading the instructions.
-- **No Task tool** — to dispatch an independent auditor, open a new Copilot Chat session and paste the [auditor-prompt](https://github.com/xBelowZero/congruence-skill/blob/main/auditor-prompt.md).
+- **No Task tool** — to dispatch an independent auditor, open a new Copilot Chat session and paste the [auditor-prompt](https://github.com/brunnocarpena/congruence-skill/blob/main/auditor-prompt.md).
 - **Repo-scoped** — instructions apply only to this repo. For global, no equivalent exists; you'd need to copy per-repo.
 
 ## Updating
 
 ```bash
-curl -L https://raw.githubusercontent.com/xBelowZero/congruence-skill/main/adapters/copilot/copilot-instructions.md \
+curl -L https://raw.githubusercontent.com/brunnocarpena/congruence-skill/main/adapters/copilot/copilot-instructions.md \
   -o .github/copilot-instructions.md
 ```
 
