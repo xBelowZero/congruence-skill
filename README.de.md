@@ -1,4 +1,4 @@
-# congruence-skill
+# Congruence — Semantische Wahrheitsprüfung für KI-Coding-Agenten
 
 > **Semantisches Congruence-Auditing für KI-Coding-Agenten.** Verifiziert, ob das, was ein KI-Agent sagt, schreibt oder dokumentiert, tatsächlich dem entspricht, was das Projekt tut. Kein technisches Code Review — prüft, ob Behauptungen über den Code wahr sind.
 

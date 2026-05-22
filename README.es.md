@@ -1,4 +1,4 @@
-# congruence-skill
+# Congruence — Auditoría de Verdad Semántica para Agentes de IA
 
 > **Auditoría de congruencia semántica para agentes de IA de coding.** Verifica que lo que un agente de IA dice, escribe o documenta realmente coincida con lo que el proyecto hace. No es revisión técnica de código — chequea si las afirmaciones sobre el código son verdaderas.
 

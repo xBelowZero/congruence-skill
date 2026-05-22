@@ -1,4 +1,4 @@
-# congruence-skill
+# Congruence — Audit de Vérité Sémantique pour Agents IA de Code
 
 > **Audit de congruence sémantique pour agents de codage IA.** Vérifie si ce qu'un agent IA dit, écrit ou documente correspond réellement à ce que fait le projet. Pas une revue de code technique — vérifie si les affirmations sur le code sont vraies.
 

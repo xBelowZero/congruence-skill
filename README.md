@@ -1,4 +1,4 @@
-# congruence-skill
+# Congruence — Semantic Truth Audit for AI Coding Agents
 
 > **Semantic congruence auditing for AI coding agents.** Verifies that what an AI agent says, writes, or documents actually matches what the project does. Not technical code review — checks whether claims about the code are true.
 
